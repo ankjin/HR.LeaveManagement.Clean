@@ -35,9 +35,9 @@ namespace HR.LeaveManagement.Infrastructure.EmailService
                 using (var smtp = new SmtpClient())
                 {
                     // AAB
-                    smtp.Host = "mail.aabqatar.com";
+                    smtp.Host = "";
                     smtp.Port = 25;
-                    smtp.Credentials = new NetworkCredential("customerservice@aabqatar.com", "cs1321!");
+                    smtp.Credentials = new NetworkCredential("", "");
 
                     //// Smart
                     //smtp.Host = "mail.ankpos.com";
