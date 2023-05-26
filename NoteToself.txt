@@ -1,0 +1,36 @@
+API
+	HR.LeaveManagement.Api
+
+Core
+	HR.LeaveManagement.Application
+		- Contracts/Interfaces
+	HR.LeaveManagement.Domain
+		- Entities
+
+Infrastructure
+	HR.LeaveManagement.Infrastructure 
+		- Implementation of HR.LeaveManagement.Application Contract/Interface
+		- Is For third party library like SendGrid, Logging
+	HR.LeaveManagement.Persistence 
+		- Implementation of HR.LeaveManagement.Application Contract/Interface
+		- EF Db Context and Repositories
+
+
+
+EF Command(-p = Project, -s Startup Project -o Output of Migrations folder -c Context ApiDbContext/ApiIdentityDbContext)
+To drop database: dotnet ef database drop -p AabBts.Dal -s AabBts.Api
+To delete Migrations : dotnet ef migrations remove -p AabBts.Dal -s AabBts.Api -c ApiDbContext
+
+
+NOTE ToDo:
+- 
+- 
+
+To Generate Api Migrations: dotnet ef migrations add InitialMigration -p HR.LeaveManagement.Persistence -s HR.LeaveManagement.Api -c DatabaseContext/HrDatabaseContext
+To Api Update Database: dotnet ef database update -p HR.LeaveManagement.Persistence -s HR.LeaveManagement.Api -c DatabaseContext/HrDatabaseContext
+
+To Generate Api Identity Migrations: dotnet ef migrations add IdentityCreate -p AabBts.Dal -s AabBts.Api -o Identity/Migrations -c ApiIdentityDbContext
+To Identity Update Database: dotnet ef database update -p AabBts.Dal -s AabBts.Api -c ApiIdentityDbContext
+
+
+

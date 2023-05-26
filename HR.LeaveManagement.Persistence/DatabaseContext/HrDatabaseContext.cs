@@ -31,11 +31,9 @@ public class HrDatabaseContext: DbContext
             .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
         {
             entry.Entity.DateModified = DateTime.Now;
-            //entry.Entity.ModifiedBy = _userService.UserId;
             if (entry.State == EntityState.Added)
             {
                 entry.Entity.DateCreated = DateTime.Now;
-                //entry.Entity.CreatedBy = _userService.UserId;
             }
         }
         return base.SaveChangesAsync(cancellationToken);

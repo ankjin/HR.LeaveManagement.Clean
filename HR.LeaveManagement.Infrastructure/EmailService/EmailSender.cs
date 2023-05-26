@@ -23,11 +23,11 @@ namespace HR.LeaveManagement.Infrastructure.EmailService
             return await SendMailClientAsync(email.To, email.Subject, email.Body);
         }
 
-        public ValueTask<bool> SendMailClientAsync(string email, string subject, string body)
+        public ValueTask<bool> SendMailClientAsync(string toEmail, string subject, string body)
         {
             MailMessage mail = new MailMessage
             (
-                "from@email.com", email, subject, body
+                _emailSettings.FromAddress, toEmail, subject, body
             );
             mail.IsBodyHtml = true;
             try
@@ -35,14 +35,14 @@ namespace HR.LeaveManagement.Infrastructure.EmailService
                 using (var smtp = new SmtpClient())
                 {
                     // AAB
-                    smtp.Host = "";
-                    smtp.Port = 25;
-                    smtp.Credentials = new NetworkCredential("", "");
+                    smtp.Host = _emailSettings.SmtpHost;
+                    smtp.Port = int.Parse(_emailSettings.SmtpPort);
+                    smtp.Credentials = new NetworkCredential(_emailSettings.SmtpCredUsername, _emailSettings.SmtpCredPassword);
 
                     //// Smart
                     //smtp.Host = "mail.ankpos.com";
                     //smtp.Port = 25;
-                    //smtp.Credentials = new NetworkCredential("postmaster@ankpos.com", "postMASTER@09");
+                    //smtp.Credentials = new NetworkCredential("", "");
 
                     smtp.Send(mail);
                     mail = null;

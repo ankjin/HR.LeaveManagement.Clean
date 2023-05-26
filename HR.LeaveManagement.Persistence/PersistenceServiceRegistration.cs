@@ -15,7 +15,8 @@ public static class PersistenceServiceRegistration
         services.AddDbContext<HrDatabaseContext>(options =>
         {
             options.UseSqlServer(configuration.GetConnectionString("HrDatabaseConnectionString"));
-        });
+            //ServiceLifetime.Transient); //// this will reset your model to its original value if you decided to cancel the operations.
+    });
 
         services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddScoped<ILeaveTypeRepository, LeaveTypeRepository>();
